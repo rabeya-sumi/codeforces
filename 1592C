@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define max 100002
+int n, k, a[max], whole_xor, cnt;
+bool visited[max];
+vector<int>V[max];
+int dfs(int start){
+    visited[start] = 1;
+    for(int i=0 ; i<V[start].size(); i++){
+        if(visited[V[start][i]]==0) a[start] = ( (a[start]) ^ ( dfs(V[start][i]) ) );
+    }
+    if(a[start]==whole_xor){
+        cnt++;
+        return 0;
+    }
+    return a[start];
+}
+
+int main()
+{
+    int t, u, v;
+    cin>>t;
+    while(t--){
+        cin>>n>>k;
+        for(int i=1 ; i<=n ; i++) cin>>a[i];
+
+        for(int i=1 ; i<=n ; i++) V[i].clear();
+        for(int i=1 ; i<n ; i++){
+            cin>>u>>v;
+            V[u].push_back(v);
+            V[v].push_back(u);
+        }
+        whole_xor = 0;
+        for(int i=1 ; i<= n; i++) whole_xor = whole_xor ^ a[i];
+        if(whole_xor==0) {
+            cout<<"YES"<<"\n";
+            continue;
+        }
+        if(k<3) {
+            cout<<"NO"<<"\n";
+            continue;
+        }
+        cnt=0;
+        for(int i=1 ; i<=n ; i++) visited[i]=0;
+        dfs(1);
+        if(cnt<2) cout<<"NO\n";
+        else      cout<<"YES\n";
+
+
+    }
+
+
+
+return 0;
+}
