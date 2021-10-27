@@ -1,0 +1,53 @@
+/*Rabeya Akter
+  Britannia University, Cumilla*/
+
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    int t, k, n, m, a[105], b[105];
+    cin>>t;
+    while(t--)
+    {
+        cin>>k>>n>>m;
+ 
+        for(int i=1; i<=n ; i++) cin>>a[i];
+        for(int i=1 ; i<=m ; i++) cin>>b[i];
+        int i=1, j=1;
+        vector<int>rv;
+        while(1)
+        {
+            if(a[i]==0 && i<=n){
+                k++;
+                i++;
+                rv.push_back(0);
+            }
+            else if(b[j]==0 && j<=m){
+                k++;
+                j++;
+                rv.push_back(0);
+            }
+            else if(a[i]<=k && i<=n) {
+                rv.push_back(a[i]);
+                i++;
+            }
+            else if(b[j]<=k && j<=m){
+                rv.push_back(b[j]);
+                j++;
+            }
+            else break;
+ 
+            if(i+j-2==n+m) break;
+ 
+        }
+        if(rv.size()==n+m){
+            for(int i=0 ; i<rv.size() ; i++) cout<<rv[i]<<' ';
+            cout<<'\n';
+        }
+        else cout<<"-1\n";
+    }
+ 
+ 
+return 0;
+}
