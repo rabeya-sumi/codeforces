@@ -1,0 +1,62 @@
+/*Rabeya Akter
+  Britannia University, Cumilla*/
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int maxn=200005, maxa=1000006;
+int arr[maxa], power[maxa], n, Q, block_s=320;
+ll total_power, ans[maxa];
+ 
+struct Query{
+    int l, r, id;
+} queries[maxn];
+bool cmp(Query x, Query y){
+    if(x.l/block_s!=y.l/block_s)
+        return x.l<y.l;
+    return x.r<y.r;
+}
+void add(int idx){
+    total_power -= (ll)power[arr[idx]]*power[arr[idx]]*arr[idx];
+    power[arr[idx]]++;
+    total_power += (ll)power[arr[idx]]*power[arr[idx]]*arr[idx];
+ 
+}
+void remov(int idx){
+    total_power -= (ll)power[arr[idx]]*power[arr[idx]]*arr[idx];
+    power[arr[idx]]--;
+    total_power += (ll)power[arr[idx]]*power[arr[idx]]*arr[idx];
+}
+ 
+int main()
+{
+    int l, r;
+    cin>>n>>Q;
+    for(int i=0 ; i<n ; i++) cin>>arr[i];
+    for(int i=0 ; i<Q ; i++){
+        cin>>l>>r;
+        l--; r--;
+        queries[i].l = l; queries[i].r = r;
+        queries[i].id = i;
+    }
+    sort(queries, queries+Q, cmp);
+    memset(power, 0, sizeof power);
+    total_power=0;
+    int L=0, R=-1;
+    for(int i=0 ; i<Q ; i++){
+        while(queries[i].l < L) add(--L);
+        while(queries[i].l > L) remov(L++);
+        while(queries[i].r < R) remov(R--);
+        while(queries[i].r > R) add(++R);
+ 
+        ans[queries[i].id] = total_power;
+    }
+    for(int i=0 ; i<Q ; i++) cout<<ans[i]<<'\n';
+ 
+ 
+ 
+return 0;
+}
