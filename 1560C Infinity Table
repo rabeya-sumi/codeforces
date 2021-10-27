@@ -1,0 +1,36 @@
+/*Rabeya Akter
+  Britannia University, Cumilla*/
+  
+  
+  #include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    int t;
+    int k;
+    cin>>t;
+    while(t--)
+    {
+        cin>>k;
+        int cr=1, plus=2, col=1;
+        while(cr+(col-1)<k){
+            cr += plus;
+            plus += 2;
+            col++;
+        }
+        int x=col, y=col;
+        if(cr>k){
+            x -= (cr-k);
+        }
+        else if(cr<k){
+            y -= (k-cr);
+        }
+        cout<<x<<" "<<y<<"\n";
+ 
+    }
+ 
+ 
+ 
+return 0;
+}
