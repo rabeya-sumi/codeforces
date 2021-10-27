@@ -1,0 +1,48 @@
+/*Rabeya Akter
+  Britannia University, Cumilla*/
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ 
+int main()
+{
+    ll t, n, a[200005];
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        ll sum=0;
+        for(int i=1;  i<=n+2 ; i++){
+            cin>>a[i];
+            sum += a[i];
+        }
+        sort(a, a+n+3);
+        if(sum-a[n+1]-a[n+2]==a[n+1]){
+            for(int i=1 ; i<=n ; i++) cout<<a[i]<<' ';
+            cout<<'\n';
+            continue;
+        }
+        int pos=-1;
+        for(int i=1 ; i<=n+1 ; i++){
+            if(sum-a[n+2]-a[i]==a[n+2]) {
+                pos=i;
+                break;
+            }
+        }
+        if(pos==-1) cout<<"-1\n";
+        else{
+            for(int i=1 ; i<=n+1 ; i++){
+                if(i==pos) continue;
+                cout<<a[i]<<' ';
+            }
+            cout<<'\n';
+        }
+ 
+    }
+ 
+ 
+return 0;
+}
