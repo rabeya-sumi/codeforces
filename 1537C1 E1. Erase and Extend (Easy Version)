@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+string check_str(string s, int k){
+    while((int)s.size() < k){
+        s = s + s;
+    }
+    while((int)s.size() > k)
+        s.pop_back();
+    return s;
+}
+ 
+int main()
+{
+    int n, k;
+    string s;
+    cin>>n>>k>>s;
+    string before = "";
+    before += s[0];
+ 
+    string ans = check_str(before, k);
+ 
+    for(int i = 1;i < n;i++){
+        if(s[i] > s[0])break;
+        before += s[i];
+        ans = min(ans, check_str(before, k));
+    }
+    cout << ans << "\n";
+ 
+return 0;
+}
